@@ -29,9 +29,6 @@ public class VentanaPrincipalNutricionista extends javax.swing.JFrame {
 
         Escritorio = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu4 = new javax.swing.JMenu();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
@@ -58,16 +55,6 @@ public class VentanaPrincipalNutricionista extends javax.swing.JFrame {
 
         jMenuBar1.setBackground(new java.awt.Color(51, 51, 51));
         jMenuBar1.setForeground(new java.awt.Color(204, 255, 204));
-
-        jMenu4.setText("Login");
-
-        jMenuItem3.setText("Registro");
-        jMenu4.add(jMenuItem3);
-
-        jMenuItem4.setText("Login");
-        jMenu4.add(jMenuItem4);
-
-        jMenuBar1.add(jMenu4);
 
         jMenu1.setText("Gestion de Pacientes");
 
@@ -179,12 +166,9 @@ public class VentanaPrincipalNutricionista extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
