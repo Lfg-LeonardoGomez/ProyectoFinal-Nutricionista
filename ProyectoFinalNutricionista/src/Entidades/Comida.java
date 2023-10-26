@@ -5,15 +5,17 @@ package Entidades;
 public class Comida {
   private int idComida,cantCalorias;
   private String nombre, detalle;
+  private boolean estado;
 
     public Comida() {
     }
 
-    public Comida(int idComida, int cantCalorias, String nombre, String detalle) {
+    public Comida(int idComida, int cantCalorias, String nombre, String detalle,boolean estado) {
         this.idComida = idComida;
         this.cantCalorias = cantCalorias;
         this.nombre = nombre;
         this.detalle = detalle;
+        this.estado = estado;
     }
 
     public Comida(int cantCalorias, String nombre, String detalle) {
@@ -54,10 +56,17 @@ public class Comida {
         this.detalle = detalle;
     }
 
-    @Override
-    public String toString() {
-        return "Comida{" + "idComida=" + idComida + ", cantCalorias=" + cantCalorias + ", nombre=" + nombre + ", detalle=" + detalle + '}';
+    public boolean isEstado() {
+        return estado;
     }
 
-    
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
+
+    @Override
+    public String toString() {
+        return "Comida{" + "idComida=" + idComida + ", cantCalorias=" + cantCalorias + ", nombre=" + nombre + ", detalle=" + detalle + ", estado=" + estado + '}';
+    }
+
 }

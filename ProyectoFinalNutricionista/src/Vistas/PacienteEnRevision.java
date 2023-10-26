@@ -202,7 +202,7 @@ pesoBuscado=(double) jTable1.getValueAt(fila, 6);
 pesoActual=(double) jTable1.getValueAt(fila, 7);
 }
 
- 
+
 System.out.println("pA"+pesoActual);
 
 Dieta d1=new Dieta(idDieta,fI,fF,pesoInicial,pesoBuscado,pesoActual,true);

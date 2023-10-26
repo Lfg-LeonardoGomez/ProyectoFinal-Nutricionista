@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -180,16 +181,19 @@ public void rehabilitarDieta(int id) {
         }
         public ArrayList<Dieta> listarPacientesPorPeso(){
         ArrayList<Dieta> listaD=new ArrayList();
-        
+        LocalDate dat=LocalDate.now();
+        DateTimeFormatter f=DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String format=dat.format(f);
         String sql="SELECT dieta.* FROM dieta JOIN paciente on dieta.idPaciente=paciente.idPaciente where fechaFinal>?";
         try {
             PreparedStatement ps=conexion.prepareStatement(sql);
+            ps.setString(1,format );
             ResultSet rs=ps.executeQuery();
             while (rs.next()){
 
                 Dieta dieta=new Dieta();
                 PacienteData pd=new PacienteData();
-                
+                dieta.setIdDieta(rs.getInt("idDieta"));
                 dieta.setPaciente(pd.buscarPorId(rs.getInt("idPaciente")));
                 dieta.setFechaInicio(rs.getDate("fechaInicio").toLocalDate());
                 dieta.setFechaFinal(rs.getDate("fechaFinal").toLocalDate());

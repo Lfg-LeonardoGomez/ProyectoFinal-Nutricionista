@@ -9,6 +9,7 @@ import Entidades.Comida;
 import java.util.*;
 import javax.swing.table.DefaultTableModel;
 
+
 /**
  *
  * @author cristina
@@ -18,6 +19,8 @@ public class FormularioGestionComidas extends javax.swing.JInternalFrame {
     ArrayList<Comida> listaC;
     ComidaData cd;
     DefaultTableModel modelo = new DefaultTableModel();
+    int id;
+    int calorias;
 
     public FormularioGestionComidas() {
         listaC = new ArrayList();
@@ -119,19 +122,28 @@ public class FormularioGestionComidas extends javax.swing.JInternalFrame {
 
         cd.eliminarComida(idComida);
         borrarFilas();
-        cargarComidas();
 
     }//GEN-LAST:event_jBEliminarActionPerformed
 
     private void jBModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBModificarActionPerformed
         int fila = jTable.getSelectedRow();
         if (fila != -1) {
-            int id = (Integer) jTable.getValueAt(fila, 0);
+            if (jTable.getValueAt(fila, 0)instanceof String) {
+                id = Integer.parseInt((String) jTable.getValueAt(fila, 0));
+            } else {
+                id = (Integer) jTable.getValueAt(fila, 0);
+            }
             String nombre = (String) jTable.getValueAt(fila, 1);
             String detalle = (String) jTable.getValueAt(fila, 2);
-            int calorias = Integer.parseInt((String) jTable.getValueAt(fila, 3));
-            cd.modificarComida(new Comida(id, calorias, nombre, detalle));
-            borrarFilas();
+              if (jTable.getValueAt(fila, 3)instanceof  String) {
+                 calorias = Integer.parseInt((String) jTable.getValueAt(fila, 3));
+            } else {
+                calorias = (Integer)jTable.getValueAt(fila, 3);
+            }
+            Comida c1 = new Comida(id,calorias,nombre,detalle,true);
+            cd.modificarComida(c1);
+            System.out.println(cd);
+            borrarFilas();    
             cargarComidas();
         }
     }//GEN-LAST:event_jBModificarActionPerformed
@@ -171,7 +183,7 @@ public class FormularioGestionComidas extends javax.swing.JInternalFrame {
         listaC = (ArrayList) cd.listarComidas();
         for (Comida c : listaC) {
             System.out.println(c);
-            modelo.addRow(new Object[]{c.getIdComida(), c.getNombre(), c.getDetalle(), c.getCantCalorias()});
+            modelo.addRow(new Object[]{c.getIdComida(), c.getNombre(), c.getDetalle(), c.getCantCalorias(), c.isEstado()});
 
         }
     }

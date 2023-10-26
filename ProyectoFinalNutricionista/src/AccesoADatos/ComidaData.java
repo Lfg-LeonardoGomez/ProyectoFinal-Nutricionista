@@ -58,7 +58,7 @@ public class ComidaData {
         }
     }
     public void eliminarComida(int idComida){
-             String sql = "DELETE FROM comida WHERE idComida=?";
+             String sql = "UPDATE comida SET estado=0 WHERE idComida=?";
        
         PreparedStatement ps;
         try {
@@ -75,7 +75,7 @@ public class ComidaData {
     public ArrayList<Comida> listarComidas(){
         ArrayList<Comida> listaC=new ArrayList();
         
-        String sql="select * from comida";
+        String sql="select * from comida where estado=1";
         try {
             PreparedStatement ps=conexion.prepareStatement(sql);
             ResultSet rs=ps.executeQuery();
@@ -84,7 +84,8 @@ public class ComidaData {
                 int calorias=rs.getInt("cantCalorias");
                 String nombre=rs.getString("nombre");
                 String detalle=rs.getString("detalle");
-                Comida comida=new Comida(idComida,calorias, nombre, detalle);
+                boolean estado=rs.getBoolean("estado");
+                Comida comida=new Comida(idComida,calorias, nombre, detalle,estado);
                 listaC.add(comida);
             }
             ps.close();
@@ -103,10 +104,11 @@ public class ComidaData {
             ps.setInt(1, calorias);
             ResultSet rs=ps.executeQuery();
             while(rs.next()){
-                int cal=rs.getInt("cantCalorias");
+                calorias=rs.getInt("cantCalorias");
                 String nombre=rs.getString("nombre");
                 String detalle=rs.getString("detalle");
-                Comida comida=new Comida(cal, nombre, detalle);
+//                boolean estado=rs.getBoolean("estado");
+                Comida comida=new Comida(calorias, nombre, detalle);
                 listaC.add(comida);
             }
             ps.close();
@@ -128,10 +130,11 @@ public Comida buscarComidaPorId   (int idComida){
             ps.setInt(1, idComida);
             ResultSet rs=ps.executeQuery();
             while(rs.next()){
-                int cal=rs.getInt("cantCalorias");
+                int calorias=rs.getInt("cantCalorias");
                 String nombre=rs.getString("nombre");
                 String detalle=rs.getString("detalle");
-                comida=new Comida(cal, nombre, detalle);
+//                boolean estado=rs.getBoolean("estado");
+                comida=new Comida(calorias,nombre,detalle);
                
             }
             ps.close();
