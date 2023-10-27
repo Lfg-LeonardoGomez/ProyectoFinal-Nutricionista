@@ -43,11 +43,11 @@ public class VentanaPrincipalNutricionista extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(1100, 700));
 
         Escritorio.setBackground(new java.awt.Color(204, 255, 255));
-        Escritorio.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/hola.jpg"))); // NOI18N
         jLabel1.setText("jLabel1");
-        Escritorio.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 1140, 640));
+        Escritorio.add(jLabel1);
+        jLabel1.setBounds(-10, 0, 1140, 640);
 
         getContentPane().add(Escritorio, java.awt.BorderLayout.CENTER);
 

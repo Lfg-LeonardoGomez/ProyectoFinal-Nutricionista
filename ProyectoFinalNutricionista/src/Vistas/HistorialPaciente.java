@@ -643,7 +643,7 @@ public class HistorialPaciente extends javax.swing.JInternalFrame {
         
         jBAgregar.setEnabled(true);
        jBEliminarComida.setEnabled(false);
-       jRAsignadas.setEnabled(false);
+       jRAsignadas.setSelected(false);
        listarComidas();
     }//GEN-LAST:event_jRadioDisponibleActionPerformed
 
