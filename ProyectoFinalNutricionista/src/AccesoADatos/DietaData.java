@@ -184,7 +184,7 @@ public void rehabilitarDieta(int id) {
         LocalDate dat=LocalDate.now();
         DateTimeFormatter f=DateTimeFormatter.ofPattern("dd/MM/yyyy");
         String format=dat.format(f);
-        String sql="SELECT dieta.* FROM dieta JOIN paciente on dieta.idPaciente=paciente.idPaciente where fechaFinal>?";
+        String sql="SELECT dieta.* FROM dieta JOIN paciente on dieta.idPaciente=paciente.idPaciente where fechaFinal>? and pesoActual != pesoBuscado";
         try {
             PreparedStatement ps=conexion.prepareStatement(sql);
             ps.setString(1,format );
@@ -213,7 +213,8 @@ public void rehabilitarDieta(int id) {
     
      }
        public Dieta buscarDietaPorIDPaciente(int id){
-            String sql="select * from dieta where idPaciente=? AND fechaInicio <= CURRENT_DATE AND fechaFinal>= CURRENT_DATE";
+            String sql="select * from dieta where idPaciente=? ";
+            //AND fechaInicio <= CURRENT_DATE AND fechaFinal>= CURRENT_DATE
             Dieta d1=null;
         try {
             PacienteData pd=new PacienteData();

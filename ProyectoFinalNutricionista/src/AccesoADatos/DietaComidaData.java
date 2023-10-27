@@ -21,23 +21,23 @@ public class DietaComidaData {
     }
     
  
-        public void agregarComidaAUnaDieta(int idDieta, List<Integer> idComidas) {
-        String sql = "INSERT INTO dietacomida (idDieta, idComida) VALUES (?, ?)";
+        public void agregarComidaAUnaDieta(int idDieta, ArrayList<Integer> idComidas) {
+        String sql = "INSERT INTO dietacomida ( idComida,idDieta) VALUES (?, ?)";
         PreparedStatement ps;
            try {
             ps = conexion.prepareStatement(sql);
             for (int idComida : idComidas) {
-                ps.setInt(1, idDieta);
-                ps.setInt(2, idComida);
-              // ps.addBatch(); 
+                ps.setInt(2, idDieta);
+                ps.setInt(1, idComida);
+               ps.addBatch(); 
                  int exito=ps.executeUpdate();
              if(exito==1){JOptionPane.showMessageDialog(null, "comida agregada a la lista...");
               }    
             }
-            ps.executeBatch();
+            
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "error al acceder a la tabla dieta");
+            JOptionPane.showMessageDialog(null, "error al acceder a la tabla dieta-comida"+ex);
         }
         
  

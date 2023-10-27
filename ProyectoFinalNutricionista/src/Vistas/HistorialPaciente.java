@@ -5,11 +5,13 @@
  */
 package Vistas;
 
+import AccesoADatos.ComidaData;
 import AccesoADatos.DietaComidaData;
 import AccesoADatos.DietaData;
 import AccesoADatos.PacienteData;
 import Entidades.Comida;
 import Entidades.Dieta;
+import Entidades.DietaComida;
 import Entidades.Paciente;
 import java.awt.Color;
 import java.time.LocalDate;
@@ -31,6 +33,7 @@ public class HistorialPaciente extends javax.swing.JInternalFrame {
     private PacienteData paData= new PacienteData();
     private DietaData dieData = new DietaData();
     private DietaComidaData dcd = new DietaComidaData();
+    private ComidaData cd=new ComidaData();
     private ArrayList <Comida> listaC;
     private DefaultTableModel modelo;
     /**
@@ -81,11 +84,14 @@ public class HistorialPaciente extends javax.swing.JInternalFrame {
         jTBuscado = new javax.swing.JTextField();
         jBEliminar = new javax.swing.JButton();
         jBModificar = new javax.swing.JButton();
-        jBComida = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jDInicio = new com.toedter.calendar.JDateChooser();
         jDFinal = new com.toedter.calendar.JDateChooser();
+        jRadioDisponible = new javax.swing.JRadioButton();
+        jRAsignadas = new javax.swing.JRadioButton();
+        jBAgregar = new javax.swing.JButton();
+        jBEliminarComida = new javax.swing.JButton();
 
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -245,13 +251,6 @@ public class HistorialPaciente extends javax.swing.JInternalFrame {
             }
         });
 
-        jBComida.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/comida 32.png"))); // NOI18N
-        jBComida.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBComidaActionPerformed(evt);
-            }
-        });
-
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -264,6 +263,26 @@ public class HistorialPaciente extends javax.swing.JInternalFrame {
             }
         ));
         jScrollPane1.setViewportView(jTable1);
+
+        jRadioDisponible.setText("Comidas Disponibles");
+        jRadioDisponible.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioDisponibleActionPerformed(evt);
+            }
+        });
+
+        jRAsignadas.setText("Comidas asignadas");
+
+        jBAgregar.setText("Agregar Comida");
+        jBAgregar.setEnabled(false);
+        jBAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBAgregarActionPerformed(evt);
+            }
+        });
+
+        jBEliminarComida.setText("Eliminar Comida");
+        jBEliminarComida.setEnabled(false);
 
         javax.swing.GroupLayout jPHistorialLayout = new javax.swing.GroupLayout(jPHistorial);
         jPHistorial.setLayout(jPHistorialLayout);
@@ -302,8 +321,6 @@ public class HistorialPaciente extends javax.swing.JInternalFrame {
                         .addGap(20, 20, 20)
                         .addGroup(jPHistorialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPHistorialLayout.createSequentialGroup()
-                                .addComponent(jBComida)
-                                .addGap(34, 34, 34)
                                 .addComponent(jBEliminar)
                                 .addGap(16, 16, 16))
                             .addGroup(jPHistorialLayout.createSequentialGroup()
@@ -332,9 +349,17 @@ public class HistorialPaciente extends javax.swing.JInternalFrame {
                             .addComponent(jBModificar)
                             .addComponent(jDFinal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPHistorialLayout.createSequentialGroup()
-                        .addGap(219, 219, 219)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(38, Short.MAX_VALUE))
+                        .addGap(37, 37, 37)
+                        .addGroup(jPHistorialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jRadioDisponible)
+                            .addComponent(jRAsignadas))
+                        .addGap(93, 93, 93)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(60, 60, 60)
+                        .addGroup(jPHistorialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jBAgregar)
+                            .addComponent(jBEliminarComida))))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
         jPHistorialLayout.setVerticalGroup(
             jPHistorialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -385,12 +410,24 @@ public class HistorialPaciente extends javax.swing.JInternalFrame {
                         .addGap(47, 47, 47)
                         .addGroup(jPHistorialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jBEliminar)
-                            .addComponent(jBModificar)
-                            .addComponent(jBComida))
-                        .addGap(33, 33, 33)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jBModificar)))
                     .addComponent(jDFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(80, Short.MAX_VALUE))
+                .addGroup(jPHistorialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPHistorialLayout.createSequentialGroup()
+                        .addGap(74, 74, 74)
+                        .addComponent(jRadioDisponible)
+                        .addGap(63, 63, 63)
+                        .addComponent(jRAsignadas))
+                    .addGroup(jPHistorialLayout.createSequentialGroup()
+                        .addGap(52, 52, 52)
+                        .addGroup(jPHistorialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPHistorialLayout.createSequentialGroup()
+                                .addComponent(jBAgregar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                                .addComponent(jBEliminarComida)
+                                .addGap(98, 98, 98))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jBModificar.getAccessibleContext().setAccessibleDescription("");
@@ -420,12 +457,15 @@ public class HistorialPaciente extends javax.swing.JInternalFrame {
             paciente=paData.buscarPorDocumento(dni);
             if(paciente != null){
                 dieta=dieData.buscarDietaPorIDPaciente(paciente.getIdPaciente());
+               
                 if(dieta != null){
+                    
                     this.jTNombre.setText(paciente.getNombre());
                     this.jTApellido.setText(paciente.getApellido());
                     this.jTDomicilio.setText(paciente.getDomicilio());
                     this.jTTelefono.setText(Integer.toString(paciente.getTelefono()));
                     this.jTDieta.setText(dieta.getNombre());
+                    
                     LocalDate lc= dieta.getFechaInicio();
                     Date date=java.util.Date.from(lc.atStartOfDay(ZoneId.systemDefault()).toInstant());
                     jDInicio.setDate(date);
@@ -489,15 +529,6 @@ public class HistorialPaciente extends javax.swing.JInternalFrame {
         }
         limpiarCampos(); 
     }//GEN-LAST:event_jBModificarActionPerformed
-
-    private void jBComidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBComidaActionPerformed
-        // TODO add your handling code here:
-        //orrarFilaTabla()
-        borrarFilaTabla();
-        cargarDatosComida();
-        
-        
-    }//GEN-LAST:event_jBComidaActionPerformed
 
     private void jTDocumentoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTDocumentoKeyReleased
         // TODO add your handling code here:
@@ -607,6 +638,32 @@ public class HistorialPaciente extends javax.swing.JInternalFrame {
        }
     }//GEN-LAST:event_jTBuscadoKeyReleased
 
+    private void jRadioDisponibleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioDisponibleActionPerformed
+       
+        
+        jBAgregar.setEnabled(true);
+       jBEliminarComida.setEnabled(false);
+       jRAsignadas.setEnabled(false);
+       listarComidas();
+    }//GEN-LAST:event_jRadioDisponibleActionPerformed
+
+    private void jBAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAgregarActionPerformed
+        int fila=jTable1.getSelectedRow();
+       if(fila!=-1){
+            ArrayList<Integer> listaC=new ArrayList();
+            Comida c1=cd.buscarComidaPorId((Integer)jTable1.getValueAt(fila, 0));
+         //  int idComida= (Integer)jTable1.getValueAt(fila, 0);
+           // System.out.println(idComida);
+            System.out.println(dieta.getIdDieta());
+            listaC.add(c1.getIdComida());
+            Dieta d1=dieData.buscarDietaPorID(dieta.getIdDieta());
+            DietaComida dc1=new DietaComida(d1, c1);
+            dcd.agregarComidaAUnaDieta(d1.getIdDieta(),listaC );
+        }
+    //int idDieta=obtenerDieta();
+    //List<Integer> idComidas=obteneridComidas();
+    }//GEN-LAST:event_jBAgregarActionPerformed
+
     private void limpiarCampos(){
         this.jTDocumento.setText("");
         this.jTNombre.setText("");
@@ -647,8 +704,17 @@ public class HistorialPaciente extends javax.swing.JInternalFrame {
             System.out.println(c);
             modelo.addRow(new Object[] {c.getIdComida(), c.getNombre(), c.getDetalle(), c.getCantCalorias()});
         }
+        
+       
     }
-    
+    private void listarComidas(){
+        listaC =  (ArrayList)cd.listarComidas();
+        for (Comida c : listaC) {
+            System.out.println(c);
+            modelo.addRow(new Object[]{c.getIdComida(), c.getNombre(), c.getDetalle(), c.getCantCalorias(), c.isEstado()});
+
+        } 
+    }
     /**
      * @param args the command line arguments
      */
@@ -685,9 +751,10 @@ public class HistorialPaciente extends javax.swing.JInternalFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBAgregar;
     private javax.swing.JButton jBBuscar1;
-    private javax.swing.JButton jBComida;
     private javax.swing.JButton jBEliminar;
+    private javax.swing.JButton jBEliminarComida;
     private javax.swing.JButton jBModificar;
     private com.toedter.calendar.JDateChooser jDFinal;
     private com.toedter.calendar.JDateChooser jDInicio;
@@ -706,6 +773,8 @@ public class HistorialPaciente extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPHistorial;
     private javax.swing.JPanel jPSeparador;
     private javax.swing.JPanel jPTitulo1;
+    private javax.swing.JRadioButton jRAsignadas;
+    private javax.swing.JRadioButton jRadioDisponible;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTActual;
     private javax.swing.JTextField jTApellido;

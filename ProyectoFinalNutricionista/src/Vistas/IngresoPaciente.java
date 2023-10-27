@@ -419,7 +419,8 @@ public class IngresoPaciente extends javax.swing.JInternalFrame {
                 paData.modificarPaciente(paciente);
                 dieData.modificarDieta(dieta);
             }
-            JOptionPane.showMessageDialog(null, "Paciente ingresado exitosamente");
+          limpiarCampos();
+//  JOptionPane.showMessageDialog(null, "Paciente ingresado exitosamente");
         }catch(NumberFormatException ex){
             System.out.println(ex.getLocalizedMessage());
             JOptionPane.showMessageDialog(null, "Debe ingresar un numero valido" +ex.getMessage());
@@ -445,7 +446,7 @@ public class IngresoPaciente extends javax.swing.JInternalFrame {
 
     private void jTNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTNombreKeyReleased
         // TODO add your handling code here:
-       Pattern patron=Pattern.compile("[a-zA-Z]+");
+       Pattern patron=Pattern.compile("[a-zA-Z_ \\t\\n\\x0B\\f\\r]+");
        String nro = this.jTNombre.getText();
        Matcher m= patron.matcher(nro);
        if(!m.matches() && nro.length()>0){
@@ -458,6 +459,7 @@ public class IngresoPaciente extends javax.swing.JInternalFrame {
     private void jTDocumentoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTDocumentoFocusLost
         // TODO add your handling code here:
         try{
+            if(jTDocumento.getText()!=""){
             Integer dni = Integer.parseInt(jTDocumento.getText());
             paciente=paData.buscarPorDocumento(dni);
             if(paciente != null){
@@ -477,10 +479,13 @@ public class IngresoPaciente extends javax.swing.JInternalFrame {
                     this.jTInicial.setText(Double.toString( dieta.getPesoInicial()));
                     this.jTActual.setText(Double.toString( dieta.getPesoActual()));
                     this.jTBuscado.setText(Double.toString(dieta.getPesoBuscado()));
+                       JOptionPane.showMessageDialog(null, "Paciente ya registrado");
                 }  
             }
+         
+            }
         }catch(NumberFormatException ex){
-            JOptionPane.showMessageDialog(null, "Debe ingresar un numero valido");
+          //  JOptionPane.showMessageDialog(null, "Debe ingresar un numero valido");
         }
     }//GEN-LAST:event_jTDocumentoFocusLost
 
@@ -522,7 +527,7 @@ public class IngresoPaciente extends javax.swing.JInternalFrame {
 
     private void jTApellidoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTApellidoKeyReleased
         // TODO add your handling code here:
-       Pattern patron=Pattern.compile("[a-zA-Z]+");
+       Pattern patron=Pattern.compile("[a-zA-Z_ \\t\\n\\x0B\\f\\r]+");
        String nro = this.jTApellido.getText();
        Matcher m= patron.matcher(nro);
        if(!m.matches() && nro.length()>0){
@@ -534,7 +539,7 @@ public class IngresoPaciente extends javax.swing.JInternalFrame {
 
     private void jTDomicilioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTDomicilioKeyReleased
         // TODO add your handling code here:
-         Pattern patron=Pattern.compile("[a-zA-Z_0-9]+");
+         Pattern patron=Pattern.compile("[a-zA-Z_0-9_ \\t\\n\\x0B\\f\\r]+");
        String nro = this.jTDomicilio.getText();
        Matcher m= patron.matcher(nro);
        if(!m.matches() && nro.length()>0){
@@ -570,7 +575,7 @@ public class IngresoPaciente extends javax.swing.JInternalFrame {
 
     private void jTDietaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTDietaKeyReleased
         // TODO add your handling code here:
-        Pattern patron=Pattern.compile("[a-zA-Z]+");
+        Pattern patron=Pattern.compile("[a-zA-Z_ \\t\\n\\x0B\\f\\r]+");
        String nro = this.jTDieta.getText();
        Matcher m= patron.matcher(nro);
        if(!m.matches() && nro.length()>0){
