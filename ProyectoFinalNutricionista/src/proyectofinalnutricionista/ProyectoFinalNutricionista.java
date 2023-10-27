@@ -76,11 +76,11 @@ public class ProyectoFinalNutricionista {
 //   for(String c:dc.listarNombresComidasPorIdDieta(1)){
 //      System.out.println(c);
 //  }
-   ComidaData cd=new ComidaData();
-   for(Comida c: cd.listarComidas()){
-       System.out.println(c);
-   }
-    
+//   ComidaData cd=new ComidaData();
+//   for(Comida c: cd.listarComidas()){
+//       System.out.println(c);
+//   }
+    dc.agregarComidaAUnaDieta(6, 2);
     }
 }
 

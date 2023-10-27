@@ -28,6 +28,7 @@ public class VentanaPrincipalNutricionista extends javax.swing.JFrame {
     private void initComponents() {
 
         Escritorio = new javax.swing.JDesktopPane();
+        jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -38,29 +39,38 @@ public class VentanaPrincipalNutricionista extends javax.swing.JFrame {
         jMenuItem5 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setForeground(java.awt.Color.white);
+        setMinimumSize(new java.awt.Dimension(1100, 700));
 
-        javax.swing.GroupLayout EscritorioLayout = new javax.swing.GroupLayout(Escritorio);
-        Escritorio.setLayout(EscritorioLayout);
-        EscritorioLayout.setHorizontalGroup(
-            EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 922, Short.MAX_VALUE)
-        );
-        EscritorioLayout.setVerticalGroup(
-            EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 566, Short.MAX_VALUE)
-        );
+        Escritorio.setBackground(new java.awt.Color(204, 255, 255));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/hola.jpg"))); // NOI18N
+        jLabel1.setText("jLabel1");
+        Escritorio.add(jLabel1);
+        jLabel1.setBounds(-10, 0, 1140, 640);
 
         getContentPane().add(Escritorio, java.awt.BorderLayout.CENTER);
 
-        jMenuBar1.setBackground(new java.awt.Color(51, 51, 51));
+        jMenuBar1.setBackground(new java.awt.Color(153, 255, 255));
         jMenuBar1.setForeground(new java.awt.Color(204, 255, 204));
 
+        jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/medico color.png"))); // NOI18N
         jMenu1.setText("Gestion de Pacientes");
 
         jMenuItem1.setText("Ingresar Paciente");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem1);
 
         jMenuItem6.setText("Historial de Paciente");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem6);
 
         jMenuItem7.setText("Pacientes en revision");
@@ -73,6 +83,7 @@ public class VentanaPrincipalNutricionista extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
+        jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/dieta color.png"))); // NOI18N
         jMenu2.setText("Comidas");
 
         jMenuItem2.setText("Gestion de Comidas");
@@ -126,6 +137,26 @@ public class VentanaPrincipalNutricionista extends javax.swing.JFrame {
         Escritorio.moveToFront(form);
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+          Escritorio.removeAll();
+        Escritorio.repaint();
+        IngresoPaciente form = new IngresoPaciente();
+        form.setVisible(true);
+        Escritorio.add(form);
+        Escritorio.moveToFront(form);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+          Escritorio.removeAll();
+        Escritorio.repaint();
+        HistorialPaciente form = new HistorialPaciente();
+        form.setVisible(true);
+        Escritorio.add(form);
+        Escritorio.moveToFront(form);
+     // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -163,6 +194,7 @@ public class VentanaPrincipalNutricionista extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane Escritorio;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;

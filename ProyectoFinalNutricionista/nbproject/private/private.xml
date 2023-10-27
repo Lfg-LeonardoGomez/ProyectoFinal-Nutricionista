@@ -1,4 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+<<<<<<< HEAD
+=======
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/Users/User/Documents/GitHub/ProyectoFinal-Nutricionista/ProyectoFinalNutricionista/src/Vistas/VentanaPrincipalNutricionista.java</file>
+            <file>file:/C:/Users/User/Documents/GitHub/ProyectoFinal-Nutricionista/ProyectoFinalNutricionista/src/AccesoADatos/DietaComidaData.java</file>
+            <file>file:/C:/Users/User/Documents/GitHub/ProyectoFinal-Nutricionista/ProyectoFinalNutricionista/src/Vistas/HistorialPaciente.java</file>
+            <file>file:/C:/Users/User/Documents/GitHub/ProyectoFinal-Nutricionista/ProyectoFinalNutricionista/src/Vistas/FormularioGestionComidas.java</file>
+        </group>
+    </open-files>
+>>>>>>> 2f7549914fae248c57a2cbd8ae19769272501527
 </project-private>
