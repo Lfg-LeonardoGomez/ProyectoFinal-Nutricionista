@@ -212,5 +212,29 @@ public void rehabilitarDieta(int id) {
         return listaD;
     
      }
-    
+       public Dieta buscarDietaPorIDPaciente(int id){
+            String sql="select * from dieta where idPaciente=? AND fechaInicio <= CURRENT_DATE AND fechaFinal>= CURRENT_DATE";
+            Dieta d1=null;
+        try {
+            PacienteData pd=new PacienteData();
+            PreparedStatement ps=conexion.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs=ps.executeQuery();
+            if(rs.next()){
+              int idDieta = rs.getInt("idDieta");
+              Paciente paciente=pd.buscarPorId( rs.getInt("idPaciente"));
+              String nombre=rs.getString("nombre");
+              LocalDate fechaInicio=rs.getDate("fechaInicio").toLocalDate();
+              LocalDate fechaFinal=rs.getDate("fechaFinal").toLocalDate();
+              double pesoInicial=rs.getDouble("pesoInicial");
+              double pesoFinal=rs.getDouble("pesoBuscado");
+              double pesoActual=rs.getDouble("pesoActual");
+                
+              d1=new Dieta(idDieta, paciente, nombre, fechaInicio, fechaFinal, pesoInicial, pesoFinal, pesoActual, true);  
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PacienteData.class.getName()).log(Level.SEVERE, null, ex);
+        }
+          return d1; 
+        } 
 }

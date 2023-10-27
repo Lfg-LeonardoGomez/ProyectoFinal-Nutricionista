@@ -85,5 +85,25 @@ public class DietaComidaData {
 
         return nombresComidas;
     }
-    
+     public ArrayList <Comida> listarComidas(int idDieta){
+        ArrayList <Comida> comidas = new ArrayList();
+        String sql = "SELECT  c.idComida, nombre, detalle, cantCalorias FROM dietacomida d INNER JOIN comida c ON d.idComida = c.idComida WHERE d.idDieta=?";
+        try{
+            PreparedStatement ps = conexion.prepareStatement(sql);
+            ps.setInt(1, idDieta);
+            ResultSet rs= ps.executeQuery();
+            while(rs.next()){
+                int idComida = rs.getInt("idComida");
+                String nombre = rs.getString("nombre");
+                String detalle= rs.getString("detalle");
+                int cantCalorias = rs.getInt("cantCalorias");
+                Comida c = new Comida(idComida, cantCalorias, nombre, detalle, true );
+                comidas.add(c);
+            }
+            ps.close();
+        }catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "error al acceder a la tabla dietacomida");
+        }
+        return comidas;
+    }
 }

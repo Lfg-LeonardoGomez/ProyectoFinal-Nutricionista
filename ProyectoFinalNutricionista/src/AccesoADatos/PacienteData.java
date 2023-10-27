@@ -140,7 +140,28 @@ public class PacienteData {
           return p1;  
         }
         
-        
+       public Paciente buscarPorDocumento(int documento){
+            String sql="select * from paciente where dni=?";
+            Paciente p1=null;
+        try {
+            PreparedStatement ps=conexion.prepareStatement(sql);
+            ps.setInt(1, documento);
+            ResultSet rs=ps.executeQuery();
+            if(rs.next()){
+                int idPaciente = rs.getInt("idPaciente");
+                String nombre=rs.getString("nombre");
+                String apellido=rs.getString("apellido");
+                String domicilio=rs.getString("domicilio");
+                int dni=rs.getInt("dni");
+                int telefono=rs.getInt("telefono");
+                
+              p1=new Paciente(idPaciente, nombre, apellido, domicilio, dni, telefono, true);  
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PacienteData.class.getName()).log(Level.SEVERE, null, ex);
+        }
+          return p1;  
+        }    
         
         
         
