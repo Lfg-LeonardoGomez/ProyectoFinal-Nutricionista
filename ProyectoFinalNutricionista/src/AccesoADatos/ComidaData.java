@@ -104,11 +104,13 @@ public class ComidaData {
             ps.setInt(1, calorias);
             ResultSet rs=ps.executeQuery();
             while(rs.next()){
+                int idComida=rs.getInt("idComida");
                 calorias=rs.getInt("cantCalorias");
                 String nombre=rs.getString("nombre");
                 String detalle=rs.getString("detalle");
-//                boolean estado=rs.getBoolean("estado");
-                Comida comida=new Comida(calorias, nombre, detalle);
+                boolean estado=rs.getBoolean("estado");
+                Comida comida=new Comida(idComida,calorias, nombre, detalle,estado);
+              
                 listaC.add(comida);
             }
             ps.close();

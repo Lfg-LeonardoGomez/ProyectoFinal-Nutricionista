@@ -39,6 +39,8 @@ public class FormularioAgregarComida extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
 
+        setClosable(true);
+
         jLabel4.setText("Detalle");
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
