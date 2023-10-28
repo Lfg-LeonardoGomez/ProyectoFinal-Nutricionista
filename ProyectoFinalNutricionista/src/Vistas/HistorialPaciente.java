@@ -641,7 +641,7 @@ public class HistorialPaciente extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTBuscadoKeyReleased
 
     private void jRadioDisponibleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioDisponibleActionPerformed
-       
+       limpiarCampos();
         
         jBAgregar.setEnabled(true);
        jBEliminarComida.setEnabled(false);

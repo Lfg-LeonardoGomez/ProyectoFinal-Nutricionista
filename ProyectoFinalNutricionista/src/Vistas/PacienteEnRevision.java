@@ -51,6 +51,8 @@ public class PacienteEnRevision extends javax.swing.JInternalFrame {
         jSalir = new javax.swing.JButton();
         jBEliminar = new javax.swing.JButton();
 
+        setClosable(true);
+
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},

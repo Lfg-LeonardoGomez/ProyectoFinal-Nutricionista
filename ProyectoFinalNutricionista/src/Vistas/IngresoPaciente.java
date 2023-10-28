@@ -400,7 +400,7 @@ public class IngresoPaciente extends javax.swing.JInternalFrame {
             boolean estado= true;
             if(paciente==null && dieta==null){
                 paciente= new Paciente(nombre, apellido, domicilio, dni, telefono, estado);
-                dieta= new Dieta(paciente, nombreDieta, fechaInicio, fechaFinal, pesoInicial, pesoActual, pesoBuscado, estado);
+                dieta= new Dieta(paciente, nombreDieta, fechaInicio, fechaFinal, pesoInicial, pesoBuscado, pesoActual,  estado);
                 paData.guardarPaciente(paciente);
                 dieData.guardarDieta(dieta);
             }else{
