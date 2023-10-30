@@ -80,7 +80,10 @@ public class ProyectoFinalNutricionista {
 //   for(Comida c: cd.listarComidas()){
 //       System.out.println(c);
 //   }
-    dc.agregarComidaAUnaDieta(6, 2);
+    //dc.agregarComidaAUnaDieta(6, 2);
+        for(Comida c:dc.listarNombresComidasPorIdDieta(1)){
+            System.out.println(c);
+        }
     }
 }
 

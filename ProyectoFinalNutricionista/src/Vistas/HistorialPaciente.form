@@ -515,6 +515,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Comidas asignadas"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jRAsignadasActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jBAgregar">
           <Properties>
@@ -530,6 +533,9 @@
             <Property name="text" type="java.lang.String" value="Eliminar Comida"/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBEliminarComidaActionPerformed"/>
+          </Events>
         </Component>
         <Component class="com.toedter.calendar.JDateChooser" name="jDInicio">
         </Component>

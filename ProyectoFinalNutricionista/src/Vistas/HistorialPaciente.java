@@ -272,6 +272,11 @@ public class HistorialPaciente extends javax.swing.JInternalFrame {
         });
 
         jRAsignadas.setText("Comidas asignadas");
+        jRAsignadas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRAsignadasActionPerformed(evt);
+            }
+        });
 
         jBAgregar.setText("Agregar Comida");
         jBAgregar.setEnabled(false);
@@ -283,6 +288,11 @@ public class HistorialPaciente extends javax.swing.JInternalFrame {
 
         jBEliminarComida.setText("Eliminar Comida");
         jBEliminarComida.setEnabled(false);
+        jBEliminarComida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBEliminarComidaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPHistorialLayout = new javax.swing.GroupLayout(jPHistorial);
         jPHistorial.setLayout(jPHistorialLayout);
@@ -641,30 +651,61 @@ public class HistorialPaciente extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTBuscadoKeyReleased
 
     private void jRadioDisponibleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioDisponibleActionPerformed
-       limpiarCampos();
+       borrarFilaTabla();
         
         jBAgregar.setEnabled(true);
        jBEliminarComida.setEnabled(false);
        jRAsignadas.setSelected(false);
-       listarComidas();
+       listaC =  (ArrayList)dcd.listarNombresComidasNoAsignadas(dieta.getIdDieta());
+        for (Comida c : listaC) {
+            System.out.println(c);
+            modelo.addRow(new Object[]{c.getIdComida(), c.getNombre(), c.getDetalle(), c.getCantCalorias()});
+
+        }
     }//GEN-LAST:event_jRadioDisponibleActionPerformed
 
     private void jBAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAgregarActionPerformed
         int fila=jTable1.getSelectedRow();
        if(fila!=-1){
-           // ArrayList<Integer> listaC=new ArrayList();
-            Comida c1=cd.buscarComidaPorId((Integer)jTable1.getValueAt(fila, 0));
+          
+            //Comida c1=cd.buscarComidaPorId((Integer)jTable1.getValueAt(fila, 0));
             int idComida= (Integer)jTable1.getValueAt(fila, 0);
-            System.out.println(idComida);
-            System.out.println("idDieta "+dieta.getIdDieta());
-            //listaC.add(c1.getIdComida());
-            Dieta d1=dieData.buscarDietaPorID(dieta.getIdDieta());
-            DietaComida dc1=new DietaComida(d1, c1);
-            dcd.agregarComidaAUnaDieta(c1.getIdComida(),d1.getIdDieta() );
+          
+           
+           // Dieta d1=dieData.buscarDietaPorID(dieta.getIdDieta());
+           // DietaComida dc1=new DietaComida(d1, c1);
+            dcd.agregarComidaAUnaDieta(idComida,dieta.getIdDieta() );
         }
-    //int idDieta=obtenerDieta();
-    //List<Integer> idComidas=obteneridComidas();
+   
     }//GEN-LAST:event_jBAgregarActionPerformed
+
+    private void jRAsignadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRAsignadasActionPerformed
+      borrarFilaTabla();
+        
+        jBAgregar.setEnabled(false);
+       jBEliminarComida.setEnabled(true);
+       jRadioDisponible.setSelected(false); 
+       
+        listaC =  (ArrayList)dcd.listarNombresComidasPorIdDieta(dieta.getIdDieta());
+        for (Comida c : listaC) {
+            System.out.println(c);
+            modelo.addRow(new Object[]{c.getIdComida(), c.getNombre(), c.getDetalle(), c.getCantCalorias()});
+
+        }
+
+// TODO add your handling code here:
+    }//GEN-LAST:event_jRAsignadasActionPerformed
+
+    private void jBEliminarComidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarComidaActionPerformed
+        int fila=jTable1.getSelectedRow();
+       if(fila!=-1){
+            Comida c1=cd.buscarComidaPorId((Integer)jTable1.getValueAt(fila, 0));
+            System.out.println(c1);
+            dcd.borrarComidasDeUnaDieta(dieta.getIdDieta(),c1.getIdComida() );
+            System.out.println(c1.getIdComida());
+       }
+       borrarFilaTabla();
+    }//GEN-LAST:event_jBEliminarComidaActionPerformed
 
     private void limpiarCampos(){
         this.jTDocumento.setText("");

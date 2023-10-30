@@ -132,11 +132,12 @@ public Comida buscarComidaPorId   (int idComida){
             ps.setInt(1, idComida);
             ResultSet rs=ps.executeQuery();
             while(rs.next()){
+                int id=rs.getInt("idComida");
                 int calorias=rs.getInt("cantCalorias");
                 String nombre=rs.getString("nombre");
                 String detalle=rs.getString("detalle");
 //                boolean estado=rs.getBoolean("estado");
-                comida=new Comida(calorias,nombre,detalle);
+                comida=new Comida(id,calorias,nombre,detalle,true);
                
             }
             ps.close();

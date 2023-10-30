@@ -49,7 +49,7 @@ public class DietaComidaData {
             ps.setInt(1, idComida);    
             ps.setInt(2, idDieta);
                 
-               ps.executeUpdate(); 
+             
                  int exito=ps.executeUpdate();
              if(exito==1){JOptionPane.showMessageDialog(null, "comida agregada a la lista...");
               }    
@@ -80,10 +80,10 @@ public class DietaComidaData {
         
     }     
 
-    public List<String> listarNombresComidasPorIdDieta(int idDieta) {
-        List<String> nombresComidas = new ArrayList<>();
+    public List<Comida> listarNombresComidasPorIdDieta(int idDieta) {
+        List<Comida> nombresComidas = new ArrayList<>();
 
-        String sql = "SELECT comida.nombre " +
+        String sql = "SELECT comida.idComida, comida.nombre, comida.detalle, comida.cantCalorias " +
                      "FROM dietaComida " +
                      "JOIN comida ON dietaComida.idComida = comida.idComida " +
                      "WHERE dietaComida.idDieta = ?";
@@ -92,8 +92,12 @@ public class DietaComidaData {
             ps.setInt(1, idDieta);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
+                int id=rs.getInt("idComida");
                 String nombre = rs.getString("nombre");
-                nombresComidas.add(nombre);
+                String detalle = rs.getString("detalle");
+                int calorias=rs.getInt("cantCalorias");
+                Comida c1=new Comida(id, calorias, nombre, detalle, true);
+                nombresComidas.add(c1);
             }
             ps.close();
         } catch (SQLException e) {
@@ -102,6 +106,31 @@ public class DietaComidaData {
 
         return nombresComidas;
     }
+    
+    public List<Comida> listarNombresComidasNoAsignadas(int idDieta) {
+        List<Comida> nombresComidas = new ArrayList<>();
+
+        String sql = "SELECT * FROM comida WHERE estado=1 AND idComida not in (SELECT idComida FROM dietacomida WHERE idDieta=?)";
+        try {
+            PreparedStatement ps = conexion.prepareStatement(sql);
+            ps.setInt(1, idDieta);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                int id=rs.getInt("idComida");
+                String nombre = rs.getString("nombre");
+                String detalle = rs.getString("detalle");
+                int calorias=rs.getInt("cantCalorias");
+                Comida c1=new Comida(id, calorias, nombre, detalle, true);
+                nombresComidas.add(c1);
+            }
+            ps.close();
+        } catch (SQLException e) {
+                     JOptionPane.showMessageDialog(null, "error al acceder a la tabla dietacomida");
+        }
+
+        return nombresComidas;
+    }
+    
      public ArrayList <Comida> listarComidas(int idDieta){
         ArrayList <Comida> comidas = new ArrayList();
         String sql = "SELECT  c.idComida, nombre, detalle, cantCalorias FROM dietacomida d INNER JOIN comida c ON d.idComida = c.idComida WHERE d.idDieta=?";
